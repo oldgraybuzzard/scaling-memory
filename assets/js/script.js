@@ -40,6 +40,9 @@ taskInfoEl.className = "task-info";
 taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataObj.name + "</h3><span class='task-type'>" + taskDataObj.type + "</span>";
 listItemEl.appendChild(taskInfoEl);
 
+var taskActionsEl = createTaskActions(taskIdCounter);
+listItemEl.appendChild(taskActionsEl);
+
 tasksToDoEl.appendChild(listItemEl);
 
 //increase task counter for next unique id
@@ -74,18 +77,17 @@ var createTaskActions = function(taskId) {
 
     for (var i = 0; i < statusChoices.length; i++) {
         //create option element
-        var statusOptionel = document.createElement("option");
-        statusOptionel.textContent = statusChoices[i];
-        statusOptionel.setAttribute("value", statusChoices[i]);
+        var statusOptionEl = document.createElement("option");
+        statusOptionEl.textContent = statusChoices[i];
+        statusOptionEl.setAttribute("value", statusChoices[i]);
 
         //append to select
-        statusSelectEl.appendChild(statusOptionel);
+        statusSelectEl.appendChild(statusOptionEl);
+
     }
 
     actionContainerEl.appendChild(statusSelectEl);
-
-
+    return actionContainerEl;
 };
-
 
 formEl.addEventListener("submit", taskFormHandler);
