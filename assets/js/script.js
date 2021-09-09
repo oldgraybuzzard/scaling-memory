@@ -69,6 +69,8 @@ tasksToDoEl.appendChild(listItemEl);
 taskDataObj.id = taskIdCounter;
 tasks.push(taskDataObj);
 
+saveTasks();
+
 //increase task counter for next unique id
 taskIdCounter++;
 
@@ -148,6 +150,7 @@ for (var i = 0; i < tasks.length; i++) {
   if (tasks[i].id !== parseInt(taskId)) {
     updatedTaskArr.push(tasks[i]);
   }
+  saveTasks();
 }
 
 // reassign tasks array to be the same as updatedTaskArr
@@ -184,6 +187,7 @@ var completeEditTask = function(taskName, taskType, taskId) {
             tasks[i].name === taskName;
             tasks[i].type = taskType;
         }
+    saveTasks();    
     }
 };
 
@@ -214,6 +218,11 @@ var taskStatusChangeHandler = function(event) {
           }
           console.log(tasks);
       }
+      saveTasks();
 };
+
+var saveTasks = function() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 pageContentEl.addEventListener("click", taskButtonHandler);
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
